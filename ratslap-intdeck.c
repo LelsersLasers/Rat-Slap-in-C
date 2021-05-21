@@ -6,6 +6,26 @@
 
 int transferCount = 0; // see if the transfer card function is the issue
 
+// prototypes
+void condense(int *d, int *val);
+void printCards(int *d);
+void shuffle(int *de);
+void splitDeck(int *deck, int *pile1, int *pile2);
+int getCardsInPile(int *arr);
+void getCardName(int value, char *stringName);
+int flip(int *pile, char *stringName);
+int checkDouble(int *arr);
+int checkSandwich(int *arr);
+int switchTurn();
+int slap();
+int checkFace(int cardValue);
+void copyArray(int *arr1, int *arr2);
+void transferCards(int *arr1, int *arr2);
+void addToArray(int *arr, int value);
+void blankArray(int *arr);
+int game(int *pile1, int *pile2);
+
+
 void condense(int *d, int *val) {
     // go through the array and move the first 0 to the end
     // so its all numbers until its all 0s
@@ -275,7 +295,6 @@ int game(int *pile1, int *pile2) {
                                 printf("Player %i won the slap!\n", slapWinner);
                                 if (slapWinner == currentPlayer) {
                                     transferCards(currentPile, pileLive);
-                                    // currentPlayer = switchTurn(currentPlayer); // double flip to keep on same person
                                     dontSwitch = 1;
                                 }
                                 else {
@@ -299,7 +318,6 @@ int game(int *pile1, int *pile2) {
                         else {
                             printf("Player %i was not able to get a face card!\n", switchTurn(currentPlayer));
                             transferCards(currentPile, pileLive); // person who placed face wins
-                            //currentPlayer = switchTurn(currentPlayer);
                             dontSwitch = 1;
                             inRound = 0;
                         }
@@ -337,7 +355,6 @@ int game(int *pile1, int *pile2) {
     }
 }
 
-
 int main() {
     // opening printfs
     printf("\nWelcome to 0 player Egpytyian Rat Slap!\n");
@@ -354,7 +371,7 @@ int main() {
             deck[i * 13 + j] = j + 1;
         }
     }
-    blankArray(deck);
+    // blankArray(deck);
     shuffle(deck);
     // set up indivual piles
     int pile1[52]; // index 0 has a card, index 51 doesnt
@@ -365,7 +382,7 @@ int main() {
     int winner = game(pile1, pile2);
 
     printf("\n\nPi1 cards: %i\n", getCardsInPile(pile1)); // line marker A
-    printf("\nPi2 cards: %i\n", getCardsInPile(pile2)); // this line + line A should equal 52, and this or A should be 0
+    printf("Pi2 cards: %i\n", getCardsInPile(pile2)); // this line + line A should equal 52, and this or A should be 0
     printf("Transfer count: %i\n", transferCount);
 
     printf("\nWinner: Player %i\n", winner);
